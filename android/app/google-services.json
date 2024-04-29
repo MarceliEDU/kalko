@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "509299346684",
+    "project_id": "kalko-bcb0b",
+    "storage_bucket": "kalko-bcb0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509299346684:android:4a46d275f02d9ce44cdb79",
+        "android_client_info": {
+          "package_name": "com.example.firebase_test_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCORnXQkZi0a0AusiwY7WcBEX7OnpMd_wI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509299346684:android:23b47db309e9a0ad4cdb79",
+        "android_client_info": {
+          "package_name": "com.example.kalko"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCORnXQkZi0a0AusiwY7WcBEX7OnpMd_wI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

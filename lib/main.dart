@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MaterialApp(
     home: App(),
     debugShowCheckedModeBanner: false,
@@ -10,12 +15,14 @@ void main() {
 class App extends StatefulWidget {
   const App({super.key});
 
+
   @override
   State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
