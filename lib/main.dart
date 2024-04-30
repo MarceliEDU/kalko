@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'navigation.dart';
 
 void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MaterialApp(
+  runApp(GetMaterialApp(
     home: App(),
     debugShowCheckedModeBanner: false,
   ));
@@ -26,6 +28,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF051d29),
+      drawer: NavBar(),
       appBar: AppBar(
         title: Text("KALKO", style: TextStyle(color: Color(0xFF051d29))),
         //centerTitle: true,
