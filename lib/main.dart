@@ -15,20 +15,30 @@ void main() async{
 class App extends StatefulWidget {
   const App({super.key});
 
-
   @override
   State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
+
   @override
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF051d29),
       appBar: AppBar(
-        title: Text("KALKO", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        backgroundColor: Colors.lightGreen,
+        title: Text("KALKO", style: TextStyle(color: Color(0xFF051d29))),
+        //centerTitle: true,
+        backgroundColor: const Color(0xFF4AF4F7),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.account_box, color: Color(0xFF051d29),),
+            tooltip: 'Profile',
+            onPressed: () {
+              // handle the press
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
