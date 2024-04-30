@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kalko/login_view.dart';
+import 'package:kalko/signup_view.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -14,14 +16,20 @@ class NavBar extends StatelessWidget {
             leading: Icon(Icons.account_box, color: Colors.white,),
             title: Text("Sign Up", style: TextStyle(color: Colors.white),),
             onTap: () => {
-              // todo
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SignupPage()),
+              )
             },
           ),
           ListTile(
             leading: Icon(Icons.account_circle, color: Colors.white,),
             title: Text("Login", style: TextStyle(color: Colors.white),),
             onTap: () => {
-              // todo
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              )
             },
           )
         ],
