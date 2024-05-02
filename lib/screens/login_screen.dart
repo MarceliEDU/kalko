@@ -1,10 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kalko/screens/signup_screen.dart';
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -18,22 +24,22 @@ class SignupPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Column(
+                const Column(
                   children: <Widget>[
-                    const SizedBox(height: 60.0),
-                    const Text(
-                      "Sign up",
+                    SizedBox(height: 60.0),
+                    Text(
+                      "Log in",
                       style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     Text(
-                      "Create your account",
+                      "Enter your credientals",
                       style: TextStyle(fontSize: 15, color: Colors.white70),
                     )
                   ],
@@ -41,6 +47,7 @@ class SignupPage extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     TextField(
+                      controller: emailController,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           hintText: "Email",
@@ -56,6 +63,7 @@ class SignupPage extends StatelessWidget {
                     const SizedBox(height: 20),
 
                     TextField(
+                      controller: passwordController,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Password",
@@ -74,18 +82,39 @@ class SignupPage extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(top: 3, left: 3),
                     child: ElevatedButton(
-                      onPressed: () {
-                      },
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         backgroundColor: Color(0xFF4AF4F7),
                       ),
                       child: const Text(
-                        "Sign up",
+                        "Log in",
                         style: TextStyle(fontSize: 20, color: Color(0xFF051d29)),
                       ),
+                      onPressed: () {
+                        FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim()
+                        ).then((value) {
+                          Navigator.pop(context);
+                        });
+                      },
                     )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text("You don't have account?", style: TextStyle(color:  Colors.white),),
+                    TextButton(
+                      child: const Text("Sign Up", style: TextStyle(color: Color(0xFF4AF4F7)),),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SignupScreen()),
+                        );
+                      },
+                    )
+                  ],
                 ),
                 TextButton(
                     onPressed: () {
