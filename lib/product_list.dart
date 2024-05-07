@@ -19,9 +19,31 @@ class _ProductListState extends State<ProductList> {
   List<int> amountOfProduct = List.empty();
   fillZeroAmounts(int n) { amountOfProduct = List.filled(n, 0); }
 
+  List<bool> changedAmountsStore = List.empty();
+  fillFalseChanged(int n) { changedAmountsStore = List.filled(n, false); }
+
   double money = 0;
   setMoney(double value) { money = value; }
   TextEditingController moneyController = TextEditingController();
+
+  setChanged(int i, int amount, double price) {
+    setState(() {
+      changedAmountsStore[i] = true;
+      amountOfProduct[i] = amount;
+      money -= amountOfProduct[i] * price;
+    });
+  }
+
+  calculate(List prices) {
+    int i = 0;
+    for (var element in prices) {
+      if(!changedAmountsStore[i]) {
+        amountOfProduct[i] =
+            (money / element).floor();
+      }
+      i++;
+    }
+  }
 
 
   addToDb(double price, String product) async {
@@ -60,6 +82,7 @@ class _ProductListState extends State<ProductList> {
         if (snapshot.hasData && !snapshot.data!.exists) { const Center(child: Text("Document does not exist, try to restart your app.", style: TextStyle(color: Colors.white, fontSize: 20))); }
 
         if (snapshot.connectionState == ConnectionState.done) {
+
           Map<String, dynamic> data = snapshot.data!.data() as Map<
               String,
               dynamic>;
@@ -68,6 +91,10 @@ class _ProductListState extends State<ProductList> {
           if (amountOfProduct.isEmpty) {
             fillZeroAmounts(prices.length);
           }
+          if (changedAmountsStore.isEmpty) {
+            fillFalseChanged(prices.length);
+          }
+          calculate(prices);
 
           try{
             return SingleChildScrollView(
@@ -81,7 +108,7 @@ class _ProductListState extends State<ProductList> {
                         Flexible(
                           child: TextField(
                             controller: moneyController,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white, fontSize: 18),
                             decoration: InputDecoration(
                               hintText: "Kwota na zakupy (PLN)",
                               hintStyle: const TextStyle(color: Colors.white54),
@@ -92,24 +119,28 @@ class _ProductListState extends State<ProductList> {
                               fillColor: Colors.white24.withOpacity(0.1),
                               filled: true,
                             ),
+                            onEditingComplete: () {
+                              setState(() {
+                                fillFalseChanged(prices.length);
+                                money = double.parse(moneyController.text);
+                              });
+                            },
                           ),
                         ),
-                        SizedBox(width: 10,),
+                        const SizedBox(width: 10,),
                         Container(
                             width: 100,
                             child: GestureDetector(
                               onTap: () {
+
                                 if (moneyController.text.isNotEmpty) {
                                   setState(() {
+                                    fillFalseChanged(prices.length);
                                     money = double.parse(moneyController.text);
-                                    int i = 0;
-                                    prices.forEach((element) {
-                                      amountOfProduct[i] =
-                                          (money / element).floor();
-                                      i++;
-                                    });
                                   });
                                 }
+
+
                               },
                               child: Container(
                                   alignment: Alignment.center,
@@ -140,6 +171,8 @@ class _ProductListState extends State<ProductList> {
                           price: prices[index],
                           displayAmount: amountOfProduct[index],
                           remove: remove,
+                          isChanged: changedAmountsStore[index],
+                          setChange: (int amount, double price) { setChanged(index, amount, price); },
                         );
                       }),
                   FormListElement(add: add),

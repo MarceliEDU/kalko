@@ -57,7 +57,7 @@ class FormListElement extends StatelessWidget {
                 IconButton(
                   iconSize: 40,
                   icon: const Icon(Icons.add_box),
-                  color: Colors.blueAccent,
+                  color: const Color(0xFF4AF4F7),
                   onPressed: () {
                     if(priceController.text.isNotEmpty && productController.text.isNotEmpty) {
                       add(double.parse(priceController.text.trim()), productController.text.trim());

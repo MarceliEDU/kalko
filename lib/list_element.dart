@@ -6,6 +6,8 @@ class ListElement extends StatefulWidget {
   final int displayAmount;
   final String documentId;
   final remove;
+  final bool isChanged;
+  final setChange;
 
   ListElement({
     Key? key,
@@ -14,6 +16,8 @@ class ListElement extends StatefulWidget {
     required this.price,
     required this.displayAmount,
     required this.remove,
+    required this.isChanged,
+    required this.setChange,
   }) : super(key: key);
 
   @override
@@ -66,16 +70,16 @@ class _ListElementState extends State<ListElement> {
                   color: Colors.white, fontSize: 16
                 ),
               ),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               Container(
                 width: 70,
                 child: TextField(
                   controller: _amountController,
                   textAlign: TextAlign.center,
                   textAlignVertical: TextAlignVertical.top,
-                  style: const TextStyle(color: Colors.amber, fontSize: 20),
-                  onChanged: (value) {
-                    // Handle onChanged if needed
+                  style: TextStyle(color: widget.isChanged == true? Colors.amber : Colors.lightGreenAccent, fontSize: 20),
+                  onEditingComplete: () {
+                    widget.setChange(int.parse(_amountController.text), widget.price);
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
