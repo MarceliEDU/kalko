@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FormListElement extends StatelessWidget {
@@ -15,7 +14,7 @@ class FormListElement extends StatelessWidget {
     final TextEditingController productController = TextEditingController();
     final TextEditingController priceController = TextEditingController();
 
-    return Container(
+    return SizedBox(
       height: 55, // Add a fixed height here
       child: Row(
         children: [
@@ -35,7 +34,7 @@ class FormListElement extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Flexible(
             child: Row(
               children: [

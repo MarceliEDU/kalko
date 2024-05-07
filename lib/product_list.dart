@@ -55,9 +55,9 @@ class _ProductListState extends State<ProductList> {
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(widget.documentId).get(),
       builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) { return Center(child: const Text("Log in to create your list", style: TextStyle(color: Colors.white, fontSize: 20))); }
+        if (snapshot.hasError) { return const Center(child: Text("Log in to create your list", style: TextStyle(color: Colors.white, fontSize: 20))); }
 
-        if (snapshot.hasData && !snapshot.data!.exists) { Center(child: const Text("Document does not exist, try to restart your app.", style: TextStyle(color: Colors.white, fontSize: 20))); }
+        if (snapshot.hasData && !snapshot.data!.exists) { const Center(child: Text("Document does not exist, try to restart your app.", style: TextStyle(color: Colors.white, fontSize: 20))); }
 
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data = snapshot.data!.data() as Map<
@@ -71,10 +71,10 @@ class _ProductListState extends State<ProductList> {
 
           try{
             return SingleChildScrollView(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 50,
                     child: Row(
                       children: [
@@ -119,8 +119,8 @@ class _ProductListState extends State<ProductList> {
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(8)),
                                   ),
-                                  child: Text("Oblicz", style: TextStyle(
-                                      color: const Color(0xFF051d29),
+                                  child: const Text("Oblicz", style: TextStyle(
+                                      color: Color(0xFF051d29),
                                       fontSize: 20))
                               ),
                             )
@@ -128,7 +128,7 @@ class _ProductListState extends State<ProductList> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   ListView.builder(
                       shrinkWrap: true,
                       itemCount: products.length,

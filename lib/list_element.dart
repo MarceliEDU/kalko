@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class ListElement extends StatefulWidget {
   final String product;
   final double price;
-  int displayAmount;
-  String documentId;
-  var remove;
+  final int displayAmount;
+  final String documentId;
+  final remove;
 
   ListElement({
     Key? key,
@@ -43,8 +43,8 @@ class _ListElementState extends State<ListElement> {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      padding: EdgeInsets.only(left: 12),
-      margin: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(left: 12),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: const Color(0xFF4AF4F7).withOpacity(0.1),
         borderRadius: BorderRadius.circular(15)
