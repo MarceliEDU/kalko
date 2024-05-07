@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color(0xFF051d29),
+        backgroundColor: const Color(0xFF051d29),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -48,10 +48,10 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     TextField(
                       controller: emailController,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           hintText: "Email",
-                          hintStyle: TextStyle(color: Colors.white54),
+                          hintStyle: const TextStyle(color: Colors.white54),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none),
@@ -64,10 +64,10 @@ class LoginScreen extends StatelessWidget {
 
                     TextField(
                       controller: passwordController,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Password",
-                        hintStyle: TextStyle(color: Colors.white54),
+                        hintStyle: const TextStyle(color: Colors.white54),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Color(0xFF4AF4F7),
+                        backgroundColor: const Color(0xFF4AF4F7),
                       ),
                       child: const Text(
                         "Log in",

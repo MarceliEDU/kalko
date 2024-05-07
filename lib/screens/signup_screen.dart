@@ -1,8 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:kalko/user_model.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -16,7 +14,7 @@ class SignupScreen extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color(0xFF051d29),
+        backgroundColor: const Color(0xFF051d29),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -50,10 +48,10 @@ class SignupScreen extends StatelessWidget {
                   children: <Widget>[
                     TextField(
                       controller: emailController,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           hintText: "Email",
-                          hintStyle: TextStyle(color: Colors.white54),
+                          hintStyle: const TextStyle(color: Colors.white54),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide.none),
@@ -66,10 +64,10 @@ class SignupScreen extends StatelessWidget {
 
                     TextField(
                       controller: passwordController,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: "Password",
-                        hintStyle: TextStyle(color: Colors.white54),
+                        hintStyle: const TextStyle(color: Colors.white54),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
@@ -87,21 +85,37 @@ class SignupScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Color(0xFF4AF4F7),
+                        backgroundColor: const Color(0xFF4AF4F7),
                       ),
                       child: const Text(
                         "Sign up",
                         style: TextStyle(fontSize: 20, color: Color(0xFF051d29)),
                       ),
                       onPressed: () {
+
+
                         FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim()
-                        ).then((value) {
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                        ).then((UserCredential userCredential) {
+                          // Extract the user's UID
+                          String userId = userCredential.user!.uid;
+
+                          // Create a Firestore document for the user
+                          FirebaseFirestore.instance.collection('Users').doc(userId).set({
+                            'email': emailController.text.trim(),
+                          }).then((value) {
+                            // Document created successfully, navigate or perform other actions
                             Navigator.pop(context);
-                        }).onError((error, stackTrace) {
-                          print(error);
+                          }).catchError((error) {
+                            // Handle Firestore errors
+                            print("Error adding user to Firestore: $error");
+                          });
+                        }).catchError((error) {
+                          // Handle Firebase Authentication errors
+                          print("Error creating user: $error");
                         });
+
 
                       },
                     )
@@ -119,8 +133,4 @@ class SignupScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-createUser() {
-
 }
