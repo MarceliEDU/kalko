@@ -101,65 +101,36 @@ class _ProductListState extends State<ProductList> {
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 50,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: TextField(
-                            controller: moneyController,
-                            style: const TextStyle(color: Colors.white, fontSize: 18),
-                            decoration: InputDecoration(
-                              hintText: "Kwota na zakupy (PLN)",
-                              hintStyle: const TextStyle(color: Colors.white54),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              fillColor: Colors.white24.withOpacity(0.1),
-                              filled: true,
-                            ),
-                            onEditingComplete: () {
-                              setState(() {
-                                fillFalseChanged(prices.length);
-                                money = double.parse(moneyController.text);
-                              });
-                            },
+                  Container(
+                    height: 60,
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    child: Center(
+                      child: TextField(
+                        controller: moneyController,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white, fontSize: 20),
+                        decoration: InputDecoration(
+                          hintText: "Kwota na zakupy (PLN)",
+                          hintStyle: const TextStyle(color: Colors.white60),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide.none,
                           ),
+                          fillColor: Colors.white.withOpacity(0.1),
+                          filled: true,
                         ),
-                        const SizedBox(width: 10,),
-                        Container(
-                            width: 100,
-                            child: GestureDetector(
-                              onTap: () {
+                        onEditingComplete: () {
 
-                                if (moneyController.text.isNotEmpty) {
-                                  setState(() {
-                                    fillFalseChanged(prices.length);
-                                    money = double.parse(moneyController.text);
-                                  });
-                                }
+                          setState(() {
+                            fillFalseChanged(prices.length);
+                            money = double.parse(moneyController.text);
+                          });
 
-
-                              },
-                              child: Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.blueAccent,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(8)),
-                                  ),
-                                  child: const Text("Oblicz", style: TextStyle(
-                                      color: Color(0xFF051d29),
-                                      fontSize: 20))
-                              ),
-                            )
-                        )
-                      ],
-                    ),
+                        },
+                      ),
+                    )
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(height: 10,),
                   ListView.builder(
                       shrinkWrap: true,
                       itemCount: products.length,
