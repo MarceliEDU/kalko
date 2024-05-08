@@ -55,7 +55,7 @@ ListTile userDependent(bool isLogged, context) {
   if(isLogged){
     return ListTile(
       leading: const Icon(Icons.logout, color: Colors.white,),
-      title: const Text("Logout", style: TextStyle(color: Colors.white),),
+      title: const Text("Log out", style: TextStyle(color: Colors.white),),
       onTap: () => {
         FirebaseAuth.instance.signOut()
       },
@@ -63,7 +63,7 @@ ListTile userDependent(bool isLogged, context) {
   } else {
     return ListTile(
       leading: const Icon(Icons.account_circle, color: Colors.white,),
-      title: const Text("Login", style: TextStyle(color: Colors.white),),
+      title: const Text("Log in", style: TextStyle(color: Colors.white),),
       onTap: () => {
         Navigator.push(
           context,
