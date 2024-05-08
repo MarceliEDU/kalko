@@ -132,6 +132,7 @@ class _ProductListState extends State<ProductList> {
                   ),
                   const SizedBox(height: 10,),
                   ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: products.length,
                       itemBuilder: (context, index) {
