@@ -38,8 +38,12 @@ class _ProductListState extends State<ProductList> {
     int i = 0;
     for (var element in prices) {
       if(!changedAmountsStore[i]) {
-        amountOfProduct[i] =
-            (money / element).floor();
+        if(money > 0){
+          amountOfProduct[i] =
+              (money / element).floor();
+        } else {
+          amountOfProduct[i] = 0;
+        }
       }
       i++;
     }
